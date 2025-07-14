@@ -17,11 +17,15 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class CustomerUser(AbstractUser):
-    username = None  # <-- remove username field
+    username = None 
     email = models.EmailField(unique=True)
+    profile_image = models.ImageField(upload_to='profile_images/',blank = True, null=True)
 
     USERNAME_FIELD = 'email'
+    
     REQUIRED_FIELDS = []  # no other required fields
+    # Add more fields and user profile image
+    # only allow .png, .jpeg, .jpg and max 3 MB imnage size
 
     objects = CustomUserManager()
 
